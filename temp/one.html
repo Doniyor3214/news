@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: blue;">pages...</h1>
+
+        <!-- <center> -->
+            <h1 style="color: rgb(107, 107, 168);">{{yangilik.title}}</h1>
+            <p style="color: rgb(37, 37, 195);">{{yangilik.text}}</p>
+            <span>{{yangilik.views}}</span>
+            <span>{{yangilik.title}}</span>
+            <span>{{yangilik.author}}</span>
+            {% if yangilik.rasm %} 
+                <img src="{{yangilik.rasm.url}}" alt="rasm yoq" style="width: 300px;">
+            {% endif %}    
+            <br><br>
+       <button><p><a href="{% url 'editnews' yangilik.id %}" style="color: rgb(14, 108, 29);">tahrirlash</a></p></button> 
+
+        <!-- </center> -->
+            <hr>
+            <h3 style="color: brown;">comments</h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                
+                <button type="submit" style="color: yellowgreen;">save</button>
+            
+
+            {% if yangilik.comment.exists %}
+                    {% for i in yangilik.comment.all %}
+                        <p>{{i.izoh}}</p>
+                        <span>{{i.user.username}} | {{i.created}}</span>
+                        <a href="{% url 'delet' yangilik.id %}">delete</a>
+                        <hr>
+                    {% endfor %}    
+            {% else %}
+            <h2>hozirda izoh mavjud emas</h2>
+            {% endif %}
+
+            </form>
+    </div>
+    
+    
+
+</body>
+</html>
