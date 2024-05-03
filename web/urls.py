@@ -25,7 +25,7 @@ from news.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('detail/<int:id>/', detail, name='detail'), 
+    path('detail/<int:id>/', detail, name='single-post'), 
     path('create_category/', CreateCategory, name='create_category'),
     path('user_register/', user_register, name ='create_user'),
     path('comment<int:id>/', createComment, name='comment'),

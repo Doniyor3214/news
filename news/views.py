@@ -29,7 +29,7 @@ def index(request):
             one_news.likes.remove(request.user)
         else:
             one_news.likes.add(request.user)    
-   
+
     return render(request, "index.html", {"news": news})
 
 
@@ -48,6 +48,7 @@ def CreateCategory(request):
 
 def Login(request):       
     login_form = LoginForm()
+    
     if request.POST:
         login_form = LoginForm(request.POST)
         if login_form.is_valid():           
@@ -58,7 +59,8 @@ def Login(request):
             login(request, user)
             messages.success(request, f"Siz , {user.username}, login qilindiz !")
         return redirect('index')
-    return render(request, 'login.html', {'form': login_form})        
+    
+    return render(request, 'login.html', {'form': login_form})         
 
 # def css(request):
 #     blackground_image = 'static/pictures.jpg'
@@ -148,7 +150,7 @@ def detail(request,id):
                 news=f
                 )
         return redirect('detail', f.id)
-    return render(request, 'one.html', {'yangilik': f, 'form': form })
+    return render(request, 'single-post.html', {'yangilik': f, 'form': form })
 
 
 def createComment(request, id):
@@ -166,7 +168,7 @@ def createComment(request, id):
             )
                           
         return redirect('detail', a.id)
-    return render(request, 'one.html', {'one':a, 'form': form})    
+    return render(request, 'single-post.html', {'one':a, 'form': form})    
 
 
 def delete_comment(request,id):
